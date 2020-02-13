@@ -12,7 +12,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_p.mk)
 PRODUCT_CHARACTERISTICS := nosdcard
 
 # Get non-open-source specific aspects
-$(call inherit-product-if-exists, vendor/xiaomi/davinci/davinci-vendor.mk)
+$(call inherit-product, vendor/xiaomi/davinci/davinci-vendor.mk)
 
 # VNDK
 PRODUCT_TARGET_VNDK_VERSION := 29
