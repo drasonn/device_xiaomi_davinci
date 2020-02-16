@@ -20,3 +20,12 @@ PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 # Inherit from custom vendor
 $(call inherit-product, vendor/MiuiCamera/config.mk)
+
+PLATFORM_SECURITY_PATCH_OVERRIDE := 2020-01-01
+
+BUILD_FINGERPRINT := "Xiaomi/davinci_eea/davinci:10/QKQ1.190825.002/V11.0.4.0.QFJEUXM:user/release-keys"
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRIVATE_BUILD_DESC="davinci-user 10 QKQ1.190825.002 V11.0.4.0.QFJEUXM release-keys" \
+    PRODUCT_NAME="davinci" \
+    TARGET_DEVICE="davinci"

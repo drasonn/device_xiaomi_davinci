@@ -43,6 +43,12 @@ void property_override_triple(char const product_prop[], char const system_prop[
     property_override(vendor_prop, value);
 }
 
+void property_override_dual(char const system_prop[], char const vendor_prop[], char const value[])
+{
+    property_override(system_prop, value);
+    property_override(vendor_prop, value);
+}
+
 void load_davinciglobal() {
     property_override("ro.product.model", "Mi 9T");
     property_override("ro.build.product", "davinci");
@@ -72,7 +78,7 @@ void load_davinci() {
     property_override("ro.product.model", "Redmi K20");
     property_override("ro.build.product", "davinci");
     property_override("ro.product.device", "davinci");
-    property_override("ro.build.description", "davinci-user 10 QKQ1.190825.002 V11.0.2.0.QFJCNXM release-keys");
+    property_override("ro.build.description", "davinci-user 10 QKQ1.190825.002 V11.0.4.0.QFJEUXM release-keys");
 }
 
 void load_dalvikvm_properties()

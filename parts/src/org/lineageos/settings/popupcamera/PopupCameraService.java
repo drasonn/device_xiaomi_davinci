@@ -285,7 +285,7 @@ public class PopupCameraService extends Service {
             if (Intent.ACTION_CAMERA_STATUS_CHANGED.equals(action)) {
                mCameraState = intent.getExtras().getString(Intent.EXTRA_CAMERA_STATE);
                updateMotor();
-            }else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
+            } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
                 if (mCameraState.equals(openCameraState)){
                     forceTakeback();
                 }

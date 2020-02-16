@@ -33,11 +33,9 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-        if (DozeUtils.isDozeEnabled(context) && DozeUtils.sensorsEnabled(context)) {
-            if (DEBUG) Log.d(TAG, "Starting Doze service");
-            DozeUtils.startService(context);
-        }
-        new DiracUtils(context).onBootCompleted();
+        if (DEBUG) Log.d(TAG, "Received boot completed intent");
+        DiracUtils.initialize(context);
+        DozeUtils.checkDozeService(context);
         PopupCameraUtils.startService(context);
     }
 }
