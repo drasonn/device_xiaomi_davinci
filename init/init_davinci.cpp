@@ -50,6 +50,17 @@ void load_davinciglobal() {
     property_override("ro.build.description", "davinci-user 10 QKQ1.190825.002 V11.0.4.0.QFJMIXM release-keys");
 }
 
+void load_davincieea() {
+    property_override_dual("ro.product.model", "ro.vendor.product.model", "Mi 9T");
+    property_override("ro.build.product", "davinci");
+    property_override_dual("ro.product.device", "ro.product.vendor.device", "davinci");
+    property_override("ro.build.description", "davinci-user 10 QKQ1.190825.002 V11.0.4.0.QFJEUXM release-keys");
+    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Xiaomi/davinci_eea/davinci:10/QKQ1.190825.002/V11.0.4.0.QFJEUXM:user/release-keys");
+    property_override("ro.product.mod_device", "davinci_eea_global");
+    property_override("ro.build.type", "user");
+    property_override("ro.boot.verifiedbootstate", "green");
+}
+
 void load_davinciin() {
     property_override("ro.product.model", "Redmi K20");
     property_override("ro.build.product", "davinciin");
@@ -96,12 +107,12 @@ void vendor_load_properties() {
     } else if (region.find("GLOBAL") != std::string::npos) {
         load_davinciglobal();
     } else {
-        LOG(ERROR) << __func__ << ": unexcepted region!";
+        load_davincieea();
     }
 
     property_override("ro.oem_unlock_supported", "0");
     property_override("ro.control_privapp_permissions", "log");
-    property_override_triple("ro.build.fingerprint", "ro.system.build.fingerprint", "ro.vendor.build.fingerprint", "google/coral/coral:10/QQ1B.200205.002/6084387:user/release-keys");
+    property_override_triple("ro.build.fingerprint", "ro.system.build.fingerprint", "ro.vendor.build.fingerprint", "Xiaomi/davinci_eea/davinci:10/QKQ1.190825.002/V11.0.4.0.QFJEUXM:user/release-keys");
 
     load_dalvikvm_properties();
 }

@@ -41,7 +41,7 @@ on property:vendor.post_boot.parsed=1
     # Disable sched stats
     write /proc/sys/kernel/sched_schedstats 0
 
-on property:sys.boot_completed=1  
+on property:sys.boot_completed=1
     # Enable idle state listener
     write /sys/class/drm/card0/device/idle_encoder_mask 1
     write /sys/class/drm/card0/device/idle_timeout_ms 100
@@ -63,6 +63,13 @@ service vendor.imsdatadaemon /vendor/bin/imsdatadaemon
     group radio wifi inet vendor_qti_diag log
     disabled
 
+service hack_attest /vendor/bin/hack_attest.sh
+    class late_start
+    user root
+    group shell
+    oneshot
+    disabled
+
 service vendor.power-hal-1-2 /system/bin/true
     disabled
 
@@ -71,6 +78,7 @@ service iop-hal-2-0 /system/bin/true
 
 service perf-hal-2-0 /system/bin/true
     disabled
+
 
 on property:init.svc.vendor.ipacm-diag=running
     stop vendor.ipacm-diag
