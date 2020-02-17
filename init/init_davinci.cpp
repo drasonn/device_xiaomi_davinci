@@ -43,28 +43,11 @@ void property_override_triple(char const product_prop[], char const system_prop[
     property_override(vendor_prop, value);
 }
 
-void property_override_dual(char const system_prop[], char const vendor_prop[], char const value[])
-{
-    property_override(system_prop, value);
-    property_override(vendor_prop, value);
-}
-
 void load_davinciglobal() {
     property_override("ro.product.model", "Mi 9T");
     property_override("ro.build.product", "davinci");
     property_override("ro.product.device", "davinci");
-    property_override("ro.build.description", "davinci-user 10 QKQ1.190825.002 V11.0.4.0.QFJMIXM release-keys");
-}
-
-void load_davincieea() {
-    property_override_dual("ro.product.model", "ro.vendor.product.model", "Mi 9T");
-    property_override("ro.build.product", "davinci");
-    property_override_dual("ro.product.device", "ro.product.vendor.device", "davinci");
     property_override("ro.build.description", "davinci-user 10 QKQ1.190825.002 V11.0.4.0.QFJEUXM release-keys");
-    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Xiaomi/davinci_eea/davinci:10/QKQ1.190825.002/V11.0.4.0.QFJEUXM:user/release-keys");
-    property_override("ro.product.mod_device", "davinci_eea_global");
-    property_override("ro.build.type", "user");
-    property_override("ro.boot.verifiedbootstate", "green");
 }
 
 void load_davinciin() {
@@ -78,7 +61,7 @@ void load_davinci() {
     property_override("ro.product.model", "Redmi K20");
     property_override("ro.build.product", "davinci");
     property_override("ro.product.device", "davinci");
-    property_override("ro.build.description", "davinci-user 10 QKQ1.190825.002 V11.0.4.0.QFJEUXM release-keys");
+    property_override("ro.build.description", "davinci-user 10 QKQ1.190825.002 V11.0.2.0.QFJCNXM release-keys");
 }
 
 void load_dalvikvm_properties()
@@ -110,10 +93,8 @@ void vendor_load_properties() {
         load_davinci();
     } else if (region.find("INDIA") != std::string::npos) {
         load_davinciin();
-    } else if (region.find("GLOBAL") != std::string::npos) {
-        load_davinciglobal();
     } else {
-        load_davincieea();
+        load_davinciglobal();
     }
 
     property_override("ro.oem_unlock_supported", "0");
