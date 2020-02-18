@@ -112,6 +112,7 @@ PRODUCT_COPY_FILES += \
 
 # Init
 PRODUCT_PACKAGES += \
+    hack_attest.sh \
     init.mi_thermald.rc \
     init.qcom.rc \
     init.safailnet.rc

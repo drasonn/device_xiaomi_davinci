@@ -99,7 +99,7 @@ void vendor_load_properties() {
 
     property_override("ro.oem_unlock_supported", "0");
     property_override("ro.control_privapp_permissions", "log");
-    property_override_triple("ro.build.fingerprint", "ro.system.build.fingerprint", "ro.vendor.build.fingerprint", "Xiaomi/davinci_eea/davinci:10/QKQ1.190825.002/V11.0.4.0.QFJEUXM:user/release-keys");
+    property_override_triple("ro.build.fingerprint", "ro.system.build.fingerprint", "ro.vendor.build.fingerprint", "google/coral/coral:10/QQ1B.200205.002/6084387:user/release-keys");
 
     load_dalvikvm_properties();
 }
