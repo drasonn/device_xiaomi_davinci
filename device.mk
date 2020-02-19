@@ -110,6 +110,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/sap.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sap.conf \
     $(LOCAL_PATH)/gps/xtwifi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/xtwifi.conf
 
+# SQL (for Gpay hack)
+PRODUCT_PACKAGES += \
+    sqlite3
+
 # Init
 PRODUCT_PACKAGES += \
     hack_attest.sh \
