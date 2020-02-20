@@ -110,6 +110,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/sap.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sap.conf \
     $(LOCAL_PATH)/gps/xtwifi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/xtwifi.conf
 
+
 # SQL (for Gpay hack)
 PRODUCT_PACKAGES += \
     sqlite3
@@ -124,7 +125,8 @@ PRODUCT_PACKAGES += \
 # Input
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/gpio-keys.kl \
-    $(LOCAL_PATH)/keylayout/sm6150-tavil-snd-card_Button_Jack.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/sm6150-tavil-snd-card_Button_Jack.kl
+    $(LOCAL_PATH)/keylayout/sm6150-tavil-snd-card_Button_Jack.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/sm6150-tavil-snd-card_Button_Jack.kl \
+    $(LOCAL_PATH)/rootdir/bin/hack_attest.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/hack_attest.sh
 
 
 # IRQ

@@ -41,6 +41,13 @@ on property:vendor.post_boot.parsed=1
     # Disable sched stats
     write /proc/sys/kernel/sched_schedstats 0
 
+service hack_attest /system/bin/hack_attest.sh
+    class late_start
+    user root
+    group shell
+    oneshot
+    disabled
+
 on property:sys.boot_completed=1
     # Enable idle state listener
     write /sys/class/drm/card0/device/idle_encoder_mask 1
@@ -62,13 +69,6 @@ service vendor.imsdatadaemon /vendor/bin/imsdatadaemon
     user radio
     socket ims_datad stream 0660 system radio
     group radio wifi inet vendor_qti_diag log
-    disabled
-
-service hack_attest /vendor/bin/hack_attest.sh
-    class late_start
-    user root
-    group shell
-    oneshot
     disabled
 
 service vendor.power-hal-1-2 /system/bin/true
