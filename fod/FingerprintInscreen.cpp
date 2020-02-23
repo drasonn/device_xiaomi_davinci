@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2019-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,16 +24,13 @@
 
 #define COMMAND_NIT 10
 #define PARAM_NIT_630_FOD 1
-#define PARAM_NIT_300_FOD 4
 #define PARAM_NIT_NONE 0
 
-#define FOD_HBM_PATH "/sys/devices/platform/soc/soc:qcom,dsi-display/fod_hbm"
-#define FOD_HBM_ON 1
-#define FOD_HBM_OFF 0
+#define DISPPARAM_PATH "/sys/class/drm/card0-DSI-1/disp_param"
+#define DISPPARAM_HBM_FOD_ON "0x20000"
+#define DISPPARAM_HBM_FOD_OFF "0xE0000"
 
-#define FOD_STATUS_PATH "/sys/devices/virtual/touch/tp_dev/fod_status"
-#define FOD_STATUS_ON 1
-#define FOD_STATUS_OFF 0
+#define Touch_Fod_Enable 10
 
 #define FOD_SENSOR_X 445
 #define FOD_SENSOR_Y 1931
@@ -41,7 +38,14 @@
 
 #define BRIGHTNESS_PATH "/sys/class/backlight/panel0-backlight/brightness"
 
-namespace {
+namespace vendor {
+namespace lineage {
+namespace biometrics {
+namespace fingerprint {
+namespace inscreen {
+namespace V1_0 {
+namespace implementation {
+
 template <typename T>
 static T get(const std::string& path, const T& def) {
     std::ifstream file(path);
@@ -56,18 +60,9 @@ static void set(const std::string& path, const T& value) {
     file << value;
 }
 
-} // anonymous namespace
-
-namespace vendor {
-namespace lineage {
-namespace biometrics {
-namespace fingerprint {
-namespace inscreen {
-namespace V1_0 {
-namespace implementation {
-
 FingerprintInscreen::FingerprintInscreen() {
     this->mFodCircleVisible = false;
+    TouchFeatureService = ITouchFeature::getService();
     xiaomiFingerprintService = IXiaomiFingerprint::getService();
 }
 
@@ -92,31 +87,28 @@ Return<void> FingerprintInscreen::onFinishEnroll() {
 }
 
 Return<void> FingerprintInscreen::onPress() {
-    set(FOD_HBM_PATH, FOD_HBM_ON);
-
-    if (get(BRIGHTNESS_PATH, 0) > 100) {
-        xiaomiFingerprintService->extCmd(COMMAND_NIT, PARAM_NIT_300_FOD);
-    } else if (get(BRIGHTNESS_PATH, 0) != 0) {
-        xiaomiFingerprintService->extCmd(COMMAND_NIT, PARAM_NIT_630_FOD);
-    }
-
+    set(DISPPARAM_PATH, DISPPARAM_HBM_FOD_ON);
+    TouchFeatureService->setTouchMode(Touch_Fod_Enable, 1);
+    xiaomiFingerprintService->extCmd(COMMAND_NIT, PARAM_NIT_630_FOD);
     return Void();
 }
 
 Return<void> FingerprintInscreen::onRelease() {
-    set(FOD_HBM_PATH, FOD_HBM_OFF);
+    set(DISPPARAM_PATH, DISPPARAM_HBM_FOD_OFF);
+    TouchFeatureService->setTouchMode(Touch_Fod_Enable, 100);
     xiaomiFingerprintService->extCmd(COMMAND_NIT, PARAM_NIT_NONE);
     return Void();
 }
 
 Return<void> FingerprintInscreen::onShowFODView() {
-    set(FOD_STATUS_PATH, FOD_STATUS_ON);
     this->mFodCircleVisible = true;
     return Void();
 }
 
 Return<void> FingerprintInscreen::onHideFODView() {
-    set(FOD_STATUS_PATH, FOD_STATUS_OFF);
+    set(DISPPARAM_PATH, DISPPARAM_HBM_FOD_OFF);
+    TouchFeatureService->resetTouchMode(Touch_Fod_Enable);
+    xiaomiFingerprintService->extCmd(COMMAND_NIT, PARAM_NIT_NONE);
     this->mFodCircleVisible = false;
     return Void();
 }
@@ -135,9 +127,9 @@ Return<void> FingerprintInscreen::setLongPressEnabled(bool) {
     return Void();
 }
 
-Return<int32_t> FingerprintInscreen::getDimAmount(int32_t /* brightness */) {
-    int realBrightness = get(BRIGHTNESS_PATH, 0);
+Return<int32_t> FingerprintInscreen::getDimAmount(int32_t) {
     float alpha;
+    int realBrightness = get(BRIGHTNESS_PATH, 0);
 
     if (realBrightness > 500) {
         alpha = 1.0 - pow(realBrightness / 2047.0 * 430.0 / 600.0, 0.455);
@@ -152,7 +144,7 @@ Return<bool> FingerprintInscreen::shouldBoostBrightness() {
     return false;
 }
 
-Return<void> FingerprintInscreen::setCallback(const sp<IFingerprintInscreenCallback>& /* callback */) {
+Return<void> FingerprintInscreen::setCallback(const sp<IFingerprintInscreenCallback>&) {
     return Void();
 }
 

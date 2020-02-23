@@ -10,11 +10,12 @@
 # Backlight
 /sys/devices/platform/soc/ae00000\.qcom\,mdss_mdp/backlight/panel0-backlight/brightness           u:object_r:sysfs_graphics:s0
 
-# Fingerprint nodes
-/sys/devices/virtual/touch/tp_dev/fod_status           u:object_r:sysfs_tp_fodstatus:s0
+# Fingerprint
+/sys/devices/platform/soc/ae00000.qcom,mdss_mdp/drm/card0/card0-DSI-1/disp_param                u:object_r:sysfs_graphics:s0
+/sys/devices/virtual/touch/tp_dev/fod_status                                                    u:object_r:sysfs_tp_fodstatus:s0
 
 # HAL fingerprint
-/system/bin/hw/vendor\.lineage\.biometrics\.fingerprint\.inscreen@1.0-service\davinci           u:object_r:hal_fod_davinci_exec:s0
+/system/bin/hw/lineage\.biometrics\.fingerprint\.inscreen@1.0-service\.davinci                  u:object_r:hal_fod_davinci_exec:s0
 
 # HAL power
 /system/bin/hw/android\.hardware\.power@1\.3-service\.davinci-libperfmgr           u:object_r:hal_power_default_exec:s0

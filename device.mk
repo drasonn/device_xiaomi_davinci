@@ -70,6 +70,10 @@ PRODUCT_COPY_FILES += \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/a2dp_in_audio_policy_configuration.xml:$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PRODUCT_TARGET_VNDK_VERSION)/etc/a2dp_in_audio_policy_configuration.xml \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration.xml:$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PRODUCT_TARGET_VNDK_VERSION)/etc/bluetooth_audio_policy_configuration.xml
 
+# Camera
+PRODUCT_PACKAGES += \
+    Snap
+
 # Display
 PRODUCT_PACKAGES += \
     libdisplayconfig \
@@ -80,10 +84,7 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    vendor.lineage.biometrics.fingerprint.inscreen@1.0-service.davinci
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fod/vendor.lineage.biometrics.fingerprint.inscreen.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml
+    lineage.biometrics.fingerprint.inscreen@1.0-service.davinci
 
 # HIDL
 PRODUCT_PACKAGES += \
@@ -199,6 +200,7 @@ PRODUCT_BOOT_JARS += \
 # TextClassifier
 PRODUCT_PACKAGES += \
     textclassifier.bundle1
+
 
 # USB
 PRODUCT_PACKAGES += \

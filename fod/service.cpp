@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "vendor.lineage.biometrics.fingerprint.inscreen@1.0-service.davinci"
+#define LOG_TAG "lineage.biometrics.fingerprint.inscreen@1.0-service.davinci"
 
 #include <android-base/logging.h>
 #include <hidl/HidlTransportSupport.h>
@@ -33,7 +33,6 @@ using android::status_t;
 int main() {
     android::sp<IFingerprintInscreen> service = new FingerprintInscreen();
 
-    android::hardware::setMinSchedulerPolicy(service, SCHED_NORMAL, -20);
     configureRpcThreadpool(1, true);
 
     status_t status = service->registerAsService();
