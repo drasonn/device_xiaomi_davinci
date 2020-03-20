@@ -1214,7 +1214,7 @@
     <bool name="config_filterDisplayModes">true</bool>
 
     <!-- Whether device ignores the RSSNR signal implementation -->
-    <bool name="config_ignoreRssnrSignalLevel">true</bool>
+    <!-- <bool name="config_ignoreRssnrSignalLevel">true</bool> -->
 
     <!-- Default value for proximity check on screen wake
      NOTE ! - Enable for devices that have a fast response proximity sensor (ideally < 300ms)-->
