@@ -25,5 +25,4 @@
          devices will be able to vary their amplitude but do not possess enough dynamic range to
          have distinct intensity levels -->
     <bool name="config_vibration_supports_multiple_intensities">true</bool>
-    <bool name="disable_overlays">true</bool>
 </resources>
